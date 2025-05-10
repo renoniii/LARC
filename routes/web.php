@@ -6,7 +6,11 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ContactoController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('index');
+})->name('inicio');
+
+
 Route::get('/productos', [ProductoController::class, 'index']);
 Route::get('/nosotros', [NosotrosController::class, 'index']);
 Route::get('/contacto', [ContactoController::class, 'index']);
@@ -34,5 +38,9 @@ Route::get('/dashboard/categorias', function () {
 })->name('dashboard.categorias');
 
 
+Auth::routes();
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
