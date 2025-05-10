@@ -13,7 +13,7 @@
         </div>
       </div>
   
-      @foreach($categorias as $categoria)
+      @foreach($categorias as $categoria) 
       <h4 class="fw-bold text-success mt-5">{{ $categoria->nombre }}</h4>
       <div class="row g-4">
         @forelse($categoria->productos as $producto)

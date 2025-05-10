@@ -23,10 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('index'); // o la ruta correcta a tu landing page
     }
 
-    public function welcome(){
-        return view('welcome');
-    }
+
 }
