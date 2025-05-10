@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\CarritoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ Route::get('/', [HomeController::class, 'index'])->name('inicio');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('producto.detalle'); 
+
+Route::post('/carrito/agregar/{id}', [ProductoController::class, 'agregarAlCarrito'])->name('carrito.agregar');
+Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
+Route::post('/carrito/disminuir/{id}', [CarritoController::class, 'disminuir'])->name('carrito.disminuir');
+Route::delete('/carrito/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 
 Route::get('/nosotros', [NosotrosController::class, 'index'])->name('nosotros');
 

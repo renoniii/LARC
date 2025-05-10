@@ -14,6 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
 </head>
@@ -35,6 +36,15 @@
                 <li class="nav-item"><a class="nav-link text-dark" href="/nosotros">Nosotros</a></li>
                 <li class="nav-item"><a class="nav-link text-dark" href="/contacto">Contacto</a></li>
                 </ul>
+
+                <!-- Carrito de compras -->
+                <a href="#" class="btn btn-outline-secondary position-relative me-3">
+                    <i class="bi bi-cart3"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </a>
+
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-degradado btn-sm me-2">Iniciar sesión</a>
                     <a href="{{ route('register') }}" class="btn btn-outline-success btn-sm">Registrarse</a>
