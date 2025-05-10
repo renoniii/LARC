@@ -1,0 +1,87 @@
+:root {
+    --larc-green: #42956C;
+    --larc-cyan: #00A1AF;
+    --larc-blue: #36A9E1;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 75px;
+}
+
+.navbar-brand img {
+    height: 50px;
+}
+
+.hero {
+    background: linear-gradient(to right, var(--larc-green), var(--larc-blue));
+    color: white;
+    height: 600px;
+    text-align: center;
+}
+
+.carousel-item {
+    height: 600px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.section-title {
+    color: var(--larc-green);
+}
+
+.nav-link {
+    color: #42956C !important;
+    transition: color 0.3s ease;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #36A9E1 !important;
+}
+
+.btn-degradado {
+    background: linear-gradient(to right, #42956C, #36A9E1);
+    color: white;
+    border: none;
+    transition: background 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-degradado:hover {
+    opacity: 0.9;
+    color: white;
+}
+
+.btn-larc {
+    background-color: white;
+    color: var(--larc-green);
+}
+
+.btn-larc:hover {
+    background-color: white;
+    color: var(--larc-blue);
+}
+
+.section-title {
+    color: var(--larc-green);
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+footer {
+    background-color: #f8f9fa;
+    color: #555;
+    padding: 20px 0;
+}

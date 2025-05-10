@@ -1,0 +1,126 @@
+:root {
+    --larc-green: #42956C;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 240px;
+    background-color: white;
+    border-right: 1px solid #ddd;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+.sidebar .header h5 {
+    margin: 0;
+    font-weight: bold;
+    color: var(--larc-green);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--larc-green);
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .nav-link {
+    padding: 12px 20px;
+    color: #333;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #e9ecef;
+    color: var(--larc-green);
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar.collapsed .nav-link span {
+    display: none;
+}
+
+.sidebar.collapsed .header h5 {
+    display: none;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 70px;
+}
+
+/* Estilos móviles */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .sidebar.collapsed {
+        width: 100% !important;
+    }
+
+    .sidebar .nav-menu {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease;
+    }
+
+    .sidebar.expanded .nav-menu {
+        max-height: 500px; /* suficiente para mostrar todo */
+    }
+
+    .sidebar .nav-link i {
+        margin-right: 8px;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        padding: 20px;
+    }
+}
