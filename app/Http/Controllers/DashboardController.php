@@ -23,7 +23,13 @@ class DashboardController extends Controller
     public function productos()
     {
         $productos = \App\Models\Producto::with('categoria')->get();
-        return view('dashboard.productos', compact('productos'));
+        return view('dashboard.productos.index', compact('productos'));
+    }
+
+    public function crearProducto()
+    {
+        $categorias = \App\Models\Categoria::all();
+        return view('dashboard.productos.crear', compact('categorias'));
     }
 
     public function guardarProducto(Request $request)
@@ -38,7 +44,7 @@ class DashboardController extends Controller
 
         $rutaImagen = $request->file('imagen')?->store('productos', 'public');
 
-        Producto::create([
+        \App\Models\Producto::create([
             'nombre' => $request->nombre,
             'categoria_id' => $request->categoria_id,
             'precio' => $request->precio,
@@ -48,6 +54,7 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard.productos')->with('success', 'Producto creado exitosamente.');
     }
+
 
     public function editarProducto($id)
     {

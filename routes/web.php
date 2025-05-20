@@ -61,17 +61,26 @@ Route::controller(ContactoController::class)->group(function () {
 */
 
 Route::prefix('dashboard')->middleware(['auth', 'admin'])->group(function () {
+    // Panel principal
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/productos', [DashboardController::class, 'productos'])->name('dashboard.productos');
-    Route::get('/productos/crear', [DashboardController::class, 'crearProducto'])->name('dashboard.productos.crear');
-    Route::post('/productos', [DashboardController::class, 'guardarProducto'])->name('dashboard.productos.guardar');
-    Route::get('/productos/{id}/editar', [DashboardController::class, 'editarProducto'])->name('dashboard.productos.editar');
-    Route::put('/productos/{id}', [DashboardController::class, 'actualizarProducto'])->name('dashboard.productos.actualizar');
-    Route::delete('/productos/{id}', [DashboardController::class, 'eliminarProducto'])->name('dashboard.productos.eliminar');
+    // Productos
+    Route::prefix('productos')->group(function () {
+        Route::get('/', [DashboardController::class, 'productos'])->name('dashboard.productos'); // <- este
+        Route::get('/crear', [DashboardController::class, 'crearProducto'])->name('dashboard.productos.crear');
+        Route::post('/', [DashboardController::class, 'guardarProducto'])->name('dashboard.productos.guardar');
+        Route::get('/{id}/editar', [DashboardController::class, 'editarProducto'])->name('dashboard.productos.editar');
+        Route::put('/{id}', [DashboardController::class, 'actualizarProducto'])->name('dashboard.productos.actualizar');
+        Route::delete('/{id}', [DashboardController::class, 'eliminarProducto'])->name('dashboard.productos.eliminar');
+    });
 
+    // Usuarios
     Route::get('/usuarios', [DashboardController::class, 'usuarios'])->name('dashboard.usuarios');
+
+    // Mensajes
     Route::get('/mensajes', [DashboardController::class, 'mensajes'])->name('dashboard.mensajes');
+
+    // Categorías
     Route::get('/categorias', [DashboardController::class, 'categorias'])->name('dashboard.categorias');
 });
 

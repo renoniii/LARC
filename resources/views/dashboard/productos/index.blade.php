@@ -19,6 +19,7 @@
                     <th>Categoría</th>
                     <th>Precio</th>
                     <th>Stock</th>
+                    <th>Descripción</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -36,6 +37,8 @@
                     <td>{{ $producto->categoria->nombre ?? 'Sin categoría' }}</td>
                     <td>${{ number_format($producto->precio, 0, ',', '.') }}</td>
                     <td>{{ $producto->stock }}</td>
+                    <td>{{ Str::limit($producto->descripcion, 80) }}</td>
+
                     <td class="text-center">
                         <a href="{{ route('dashboard.productos.editar', $producto->id) }}" class="btn btn-sm btn-primary me-1">
                             <i class="bi bi-pencil"></i>
