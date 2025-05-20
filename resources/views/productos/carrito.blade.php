@@ -44,7 +44,7 @@
                         <p class="mb-2">Subtotal:</p>
                         <p class="fw-bold h5 text-success">${{ number_format($total, 0, ',', '.') }}</p>
                         <div class="d-grid mt-3">
-                            <a href="#" class="btn btn-degradado">Proceder al pago</a>
+                            <a href="{{ route('checkout') }}" class="btn btn-degradado">Proceder al pago</a>
                         </div>
                         <a href="{{ route('productos') }}" class="btn btn-outline-secondary mt-3 w-100">← Seguir comprando</a>
                     </div>

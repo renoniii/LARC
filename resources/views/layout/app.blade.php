@@ -46,12 +46,26 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route('dashboard') }}">Panel de administración</a>
+                                <a class="dropdown-item" href="{{ route('ordenes.index') }}">
+                                    <i class="bi bi-clock-history me-1"></i> Mis pedidos
+                                </a>
+                            </li>
+
+                            @if(Auth::user() && Auth::user()->role === 'admin')
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                        <i class="bi bi-speedometer2 me-1"></i> Panel de administración
+                                    </a>
+                                </li>
+                            @endif
+
+                            <li>
+                                <hr class="dropdown-divider">
                             </li>
                             <li>
                                 <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Cerrar sesión
+                                    <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

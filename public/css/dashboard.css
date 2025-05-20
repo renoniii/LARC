@@ -123,4 +123,22 @@ body {
         margin-left: 0 !important;
         padding: 20px;
     }
+
+    .card i {
+    font-size: 2.5rem;
+    display: block;
+    }
+
+    .btn-degradado {
+    background: linear-gradient(to right, #42956C, #36A9E1);
+    color: white;
+    border: none;
+    font-weight: 600;
+    }
+
+    .btn-degradado:hover {
+        opacity: 0.9;
+        color: white;
+    }
+
 }

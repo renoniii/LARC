@@ -1,34 +1,58 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
 | Rutas públicas
 |--------------------------------------------------------------------------
 */
-Route::get('/', [HomeController::class, 'index'])->name('inicio');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Home
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('inicio');
+    Route::get('/home', 'index')->name('home');
+});
 
-Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
-Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('producto.detalle'); 
+// Productos
+Route::controller(ProductoController::class)->group(function () {
+    Route::get('/productos', 'index')->name('productos');
+    Route::get('/productos/{id}', 'show')->name('producto.detalle');
+});
 
-Route::post('/carrito/agregar/{id}', [ProductoController::class, 'agregarAlCarrito'])->name('carrito.agregar');
-Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
-Route::post('/carrito/disminuir/{id}', [CarritoController::class, 'disminuir'])->name('carrito.disminuir');
-Route::delete('/carrito/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+// Carrito y checkout
+Route::controller(CarritoController::class)->group(function () {
+    Route::post('/carrito/agregar/{id}', 'agregar')->name('carrito.agregar');
+    Route::get('/carrito', 'ver')->name('carrito.ver');
+    Route::post('/carrito/disminuir/{id}', 'disminuir')->name('carrito.disminuir');
+    Route::delete('/carrito/{id}', 'eliminar')->name('carrito.eliminar');
 
-Route::get('/nosotros', [NosotrosController::class, 'index'])->name('nosotros');
+    Route::middleware('auth')->group(function () {
+        Route::get('/checkout', 'checkout')->name('checkout');
+        Route::post('/checkout', 'procesarCheckout')->name('checkout.procesar');
+    });
+});
 
-Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+// Órdenes
+Route::get('/mis-pedidos', [OrdenController::class, 'index'])->name('ordenes.index');
 
-Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contacto.enviar');
+// Páginas informativas
+Route::controller(NosotrosController::class)->group(function () {
+    Route::get('/nosotros', 'index')->name('nosotros');
+});
+
+Route::controller(ContactoController::class)->group(function () {
+    Route::get('/contacto', 'index')->name('contacto');
+    Route::post('/contacto', 'enviar')->name('contacto.enviar');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -36,25 +60,20 @@ Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contacto.
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware(['auth', 'admin'])->name('dashboard');
+Route::prefix('dashboard')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/dashboard/productos', function () {
-    return view('dashboard.productos');
-})->middleware(['auth', 'admin'])->name('dashboard.productos');
+    Route::get('/productos', [DashboardController::class, 'productos'])->name('dashboard.productos');
+    Route::get('/productos/crear', [DashboardController::class, 'crearProducto'])->name('dashboard.productos.crear');
+    Route::post('/productos', [DashboardController::class, 'guardarProducto'])->name('dashboard.productos.guardar');
+    Route::get('/productos/{id}/editar', [DashboardController::class, 'editarProducto'])->name('dashboard.productos.editar');
+    Route::put('/productos/{id}', [DashboardController::class, 'actualizarProducto'])->name('dashboard.productos.actualizar');
+    Route::delete('/productos/{id}', [DashboardController::class, 'eliminarProducto'])->name('dashboard.productos.eliminar');
 
-Route::get('/dashboard/usuarios', function () {
-    return view('dashboard.usuarios');
-})->middleware(['auth', 'admin'])->name('dashboard.usuarios');
-
-Route::get('/dashboard/mensajes', function () {
-    return view('dashboard.mensajes');
-})->middleware(['auth', 'admin'])->name('dashboard.mensajes');
-
-Route::get('/dashboard/categorias', function () {
-    return view('dashboard.categorias');
-})->middleware(['auth', 'admin'])->name('dashboard.categorias');
+    Route::get('/usuarios', [DashboardController::class, 'usuarios'])->name('dashboard.usuarios');
+    Route::get('/mensajes', [DashboardController::class, 'mensajes'])->name('dashboard.mensajes');
+    Route::get('/categorias', [DashboardController::class, 'categorias'])->name('dashboard.categorias');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +81,4 @@ Route::get('/dashboard/categorias', function () {
 |--------------------------------------------------------------------------
 */
 
-Auth::routes(['verify' => true]); // habilita verificación de email
-
+Auth::routes(['verify' => true]);

@@ -2,66 +2,63 @@
 
 @section('content')
 
-<!-- Main content -->
 <div class="main-content">
-    <h3 class="fw-bold text-success mb-4">Panel de Administración</h3>
+    <h3 class="fw-bold text-success mb-4"><i class="bi bi-speedometer2 me-2"></i>Panel de Administración</h3>
 
     <div class="row g-4">
-      <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-          <div class="card-body d-flex align-items-center">
-            <div class="card-icon text-success"><i class="bi bi-basket-fill"></i></div>
-            <div>
-              <h6 class="mb-0">Productos</h6>
-              <span class="fw-bold">58</span>
+        {{-- Productos --}}
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-basket-fill fs-1 text-success mb-2"></i>
+                    <h6 class="mb-0">Productos</h6>
+                    <span class="fw-bold fs-5">{{ $totalProductos }}</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-          <div class="card-body d-flex align-items-center">
-            <div class="card-icon text-primary"><i class="bi bi-people-fill"></i></div>
-            <div>
-              <h6 class="mb-0">Usuarios</h6>
-              <span class="fw-bold">14</span>
+
+        {{-- Usuarios --}}
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-people-fill fs-1 text-primary mb-2"></i>
+                    <h6 class="mb-0">Usuarios</h6>
+                    <span class="fw-bold fs-5">{{ $totalUsuarios }}</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-          <div class="card-body d-flex align-items-center">
-            <div class="card-icon text-warning"><i class="bi bi-folder-fill"></i></div>
-            <div>
-              <h6 class="mb-0">Categorías</h6>
-              <span class="fw-bold">7</span>
+
+        {{-- Categorías --}}
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-folder-fill fs-1 text-warning mb-2"></i>
+                    <h6 class="mb-0">Categorías</h6>
+                    <span class="fw-bold fs-5">{{ $totalCategorias }}</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-          <div class="card-body d-flex align-items-center">
-            <div class="card-icon text-danger"><i class="bi bi-envelope-fill"></i></div>
-            <div>
-              <h6 class="mb-0">Mensajes</h6>
-              <span class="fw-bold">3</span>
+
+        {{-- Mensajes --}}
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-envelope-fill fs-1 text-danger mb-2"></i>
+                    <h6 class="mb-0">Mensajes</h6>
+                    {{-- <span class="fw-bold fs-5">{{ $totalMensajes }}</span> --}}
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
-    <div class="card mt-4 shadow-sm">
-      <div class="card-header bg-light">
-        Bienvenido, <strong>Admin Ejemplo</strong>
-      </div>
-      <div class="card-body">
-        <p>Desde este panel puedes gestionar productos, usuarios, categorías y mensajes del sitio <strong>LARC</strong>.</p>
-      </div>
+    <div class="card mt-5 shadow-sm border-0">
+        <div class="card-header bg-light fw-semibold">
+            Bienvenido, <strong>{{ Auth::user()->name }}</strong>
+        </div>
+        <div class="card-body">
+            <p>Desde este panel puedes gestionar los recursos del sitio <strong>LARC</strong>: productos, usuarios, categorías, mensajes y más.</p>
+        </div>
     </div>
-  </div>
 </div>
 
 @endsection

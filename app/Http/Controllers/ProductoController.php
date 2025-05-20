@@ -11,15 +11,15 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         $query = Producto::query();
-    
+
         if ($request->has('search')) {
             $query->where('nombre', 'like', '%' . $request->search . '%');
         }
-    
+
         if ($request->filled('categoria')) {
             $query->where('categoria_id', $request->categoria);
         }
-    
+
         $productos = $query->paginate(9);
         $categorias = Categoria::all();
 
@@ -31,30 +31,4 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         return view('productos.show', compact('producto'));
     }
-
-    public function agregarAlCarrito(Request $request, $id)
-    {
-        $producto = Producto::findOrFail($id);
-        $cantidad = $request->input('cantidad', 1);
-
-        $carrito = session()->get('carrito', []);
-
-        if (isset($carrito[$id])) {
-            $carrito[$id]['cantidad'] += $cantidad;
-        } else {
-            $carrito[$id] = [
-                'nombre' => $producto->nombre,
-                'precio' => $producto->precio,
-                'imagen' => $producto->imagen,
-                'cantidad' => $cantidad,
-            ];
-        }
-
-        session()->put('carrito', $carrito);
-
-        return redirect()->back()->with('success', 'Producto añadido al carrito.');
-    }
-    
-    // Si más adelante haces detalle de producto:
-  // public function show($id) { return view('productos.show', compact('id')); }
 }

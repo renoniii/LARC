@@ -85,3 +85,21 @@ footer {
     color: #555;
     padding: 20px 0;
 }
+
+/* Estilos responsivos para el dropdown del usuario */
+@media (max-width: 991.98px) {
+    .dropdown-menu-end[aria-labelledby="userDropdown"] {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        margin-top: 0.5rem;
+        box-shadow: none;
+        border-radius: 0;
+        border: 1px solid #dee2e6;
+    }
+
+    .dropdown-menu-end[aria-labelledby="userDropdown"] a.dropdown-item {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
