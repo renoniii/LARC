@@ -39,13 +39,13 @@
             </div>
         </div>
 
-        {{-- Mensajes --}}
+        {{-- Ordenes --}}
         <div class="col-md-3 col-6">
             <div class="card border-0 shadow-sm h-100 text-center">
                 <div class="card-body">
-                    <i class="bi bi-envelope-fill fs-1 text-danger mb-2"></i>
-                    <h6 class="mb-0">Mensajes</h6>
-                    {{-- <span class="fw-bold fs-5">{{ $totalMensajes }}</span> --}}
+                    <i class="bi bi-cart-check-fill fs-1 text-danger mb-2"></i>
+                    <h6 class="mb-0">Ordenes</h6>
+                    <span class="fw-bold fs-5">{{ $totalOrdenes }}</span>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
             Bienvenido, <strong>{{ Auth::user()->name }}</strong>
         </div>
         <div class="card-body">
-            <p>Desde este panel puedes gestionar los recursos del sitio <strong>LARC</strong>: productos, usuarios, categorías, mensajes y más.</p>
+            <p>Desde este panel puedes gestionar los recursos del sitio <strong>LARC</strong>: productos, usuarios, categorías, pedidos y más.</p>
         </div>
     </div>
 </div>

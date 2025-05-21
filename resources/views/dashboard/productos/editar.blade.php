@@ -47,6 +47,12 @@
             <input type="file" name="imagen" class="form-control mt-2">
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3">{{ old('descripcion', $producto->descripcion) }}</textarea>
+        </div>
+
+
         <div class="text-end">
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-save me-1"></i> Guardar cambios

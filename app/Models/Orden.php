@@ -13,5 +13,11 @@ class Orden extends Model
     protected $casts = [
         'productos' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
 

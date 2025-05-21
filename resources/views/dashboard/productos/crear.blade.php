@@ -38,6 +38,12 @@
             <input type="file" name="imagen" class="form-control">
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3"></textarea>
+        </div>
+
+
         <div class="text-end">
             <button type="submit" class="btn btn-success"><i class="bi bi-save me-1"></i>Guardar</button>
         </div>

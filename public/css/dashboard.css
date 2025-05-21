@@ -14,6 +14,9 @@ body {
 }
 
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     width: 240px;
     background-color: white;
     border-right: 1px solid #ddd;
@@ -88,6 +91,26 @@ body {
     margin-left: 70px;
 }
 
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sidebar.collapsed .sidebar-footer .footer-text {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-footer .btn {
+    justify-content: center;
+    padding: 10px;
+    font-size: 0;
+}
+
+.sidebar.collapsed .sidebar-footer .btn i {
+    font-size: 1.2rem;
+}
+
 /* Estilos móviles */
 @media (max-width: 768px) {
     .wrapper {
@@ -141,4 +164,23 @@ body {
         color: white;
     }
 
+    .sidebar-footer .footer-text {
+        display: inline !important;
+        font-size: 1rem;
+    }
+
+    .sidebar-footer .btn {
+        font-size: 1rem;
+        justify-content: center;
+    }
+
+    .sidebar .nav-wrapper {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+    }
+
+    .sidebar.expanded .nav-wrapper {
+        max-height: 1000px; /* suficiente para mostrar todo */
+    }
 }

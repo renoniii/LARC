@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\User;
 use App\Models\Categoria;
-use App\Models\Mensaje;
+use App\Models\Orden;
 
 class DashboardController extends Controller
 {
@@ -16,10 +16,11 @@ class DashboardController extends Controller
             'totalProductos' => Producto::count(),
             'totalUsuarios' => User::count(),
             'totalCategorias' => Categoria::count(),
-            //'totalMensajes' => Mensaje::count()
+            'totalOrdenes' => Orden::count()
         ]);
     }
 
+    //PRODUCTOS
     public function productos()
     {
         $productos = \App\Models\Producto::with('categoria')->get();
@@ -39,6 +40,7 @@ class DashboardController extends Controller
             'categoria_id' => 'required|exists:categorias,id',
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
+            'descripcion' => 'nullable|string|max:1000',
             'imagen' => 'nullable|image|max:2048',
         ]);
 
@@ -49,6 +51,7 @@ class DashboardController extends Controller
             'categoria_id' => $request->categoria_id,
             'precio' => $request->precio,
             'stock' => $request->stock,
+            'descripcion' => $request->descripcion,
             'imagen' => $rutaImagen ? 'storage/' . $rutaImagen : null,
         ]);
 
@@ -72,6 +75,7 @@ class DashboardController extends Controller
             'categoria_id' => 'required|exists:categorias,id',
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
+            'descripcion' => 'nullable|string|max:1000',
             'imagen' => 'nullable|image|max:2048',
         ]);
 
@@ -83,38 +87,80 @@ class DashboardController extends Controller
             $producto->imagen = 'storage/' . $rutaImagen;
         }
 
-        $producto->update($request->only('nombre', 'categoria_id', 'precio', 'stock'));
+        $producto->update([
+            'nombre' => $request->nombre,
+            'categoria_id' => $request->categoria_id,
+            'precio' => $request->precio,
+            'stock' => $request->stock,
+            'descripcion' => $request->descripcion,
+        ]);
 
         return redirect()->route('dashboard.productos')->with('success', 'Producto actualizado correctamente.');
     }
 
     public function eliminarProducto($id)
-{
-    $producto = \App\Models\Producto::findOrFail($id);
+    {
+        $producto = \App\Models\Producto::findOrFail($id);
 
-    // Eliminar imagen si existe
-    if ($producto->imagen && file_exists(public_path($producto->imagen))) {
-        unlink(public_path($producto->imagen));
+        // Eliminar imagen si existe
+        if ($producto->imagen && file_exists(public_path($producto->imagen))) {
+            unlink(public_path($producto->imagen));
+        }
+
+        $producto->delete();
+
+        return redirect()->route('dashboard.productos')->with('success', 'Producto eliminado correctamente.');
     }
 
-    $producto->delete();
-
-    return redirect()->route('dashboard.productos')->with('success', 'Producto eliminado correctamente.');
-}
-
-
+    //USUARIOS
     public function usuarios()
     {
-        return view('dashboard.usuarios');
+        $usuarios = User::all();
+        return view('dashboard.usuarios', compact('usuarios'));
     }
 
-    public function mensajes()
+    //ORDENES
+    public function ordenes()
     {
-        return view('dashboard.mensajes');
+        $ordenes = Orden::with('user')->latest()->get();
+        return view('dashboard.orden', compact('ordenes'));
     }
 
+    //CATEGORIAS
     public function categorias()
     {
-        return $this->belongsTo(Categoria::class);
+        $categorias = Categoria::all();
+        return view('dashboard.categorias.index', compact('categorias'));
+    }
+
+    public function crearCategoria()
+    {
+        return view('dashboard.categorias.crear');
+    }
+
+    public function guardarCategoria(Request $request)
+    {
+        $request->validate(['nombre' => 'required']);
+        Categoria::create($request->only('nombre'));
+        return redirect()->route('dashboard.categorias')->with('success', 'Categoría creada.');
+    }
+
+    public function editarCategoria($id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        return view('dashboard.categorias.editar', compact('categoria'));
+    }
+
+    public function actualizarCategoria(Request $request, $id)
+    {
+        $request->validate(['nombre' => 'required']);
+        Categoria::findOrFail($id)->update($request->only('nombre'));
+        return redirect()->route('dashboard.categorias')->with('success', 'Categoría actualizada.');
+    }
+
+    public function eliminarCategoria($id)
+    {
+        Categoria::findOrFail($id)->delete();
+        return redirect()->route('dashboard.categorias')->with('success', 'Categoría eliminada.');
     }
 }

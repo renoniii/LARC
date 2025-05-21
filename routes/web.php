@@ -77,11 +77,18 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->group(function () {
     // Usuarios
     Route::get('/usuarios', [DashboardController::class, 'usuarios'])->name('dashboard.usuarios');
 
-    // Mensajes
-    Route::get('/mensajes', [DashboardController::class, 'mensajes'])->name('dashboard.mensajes');
+    // Ordenes
+    Route::get('/orden', [DashboardController::class, 'ordenes'])->name('dashboard.orden');
 
     // Categorías
-    Route::get('/categorias', [DashboardController::class, 'categorias'])->name('dashboard.categorias');
+    Route::prefix('categorias')->group(function () {
+        Route::get('/', [DashboardController::class, 'categorias'])->name('dashboard.categorias');
+        Route::get('/crear', [DashboardController::class, 'crearCategoria'])->name('dashboard.categorias.crear');
+        Route::post('/', [DashboardController::class, 'guardarCategoria'])->name('dashboard.categorias.guardar');
+        Route::get('/{id}/editar', [DashboardController::class, 'editarCategoria'])->name('dashboard.categorias.editar');
+        Route::put('/{id}', [DashboardController::class, 'actualizarCategoria'])->name('dashboard.categorias.actualizar');
+        Route::delete('/{id}', [DashboardController::class, 'eliminarCategoria'])->name('dashboard.categorias.eliminar');
+    });
 });
 
 /*
