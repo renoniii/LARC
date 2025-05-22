@@ -40,16 +40,18 @@
                     <td>{{ Str::limit($producto->descripcion, 80) }}</td>
 
                     <td class="text-center">
-                        <a href="{{ route('dashboard.productos.editar', $producto->id) }}" class="btn btn-sm btn-primary me-1">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                        <form action="{{ route('dashboard.productos.eliminar', $producto->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
+                        <div class="d-flex justify-content-center gap-1">
+                            <a href="{{ route('dashboard.productos.editar', $producto->id) }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form action="{{ route('dashboard.productos.eliminar', $producto->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este producto?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

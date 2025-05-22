@@ -11,38 +11,37 @@
           <th>Nombre</th>
           <th>Email</th>
           <th>Rol</th>
-          <th>Estado</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         @foreach($usuarios as $usuario)
-          <tr>
-            <td>{{ $usuario->name }}</td>
-            <td>{{ $usuario->email }}</td>
-            <td>
-              @if($usuario->is_admin)
-                <span class="badge bg-success">Admin</span>
-              @else
-                <span class="badge bg-secondary">Usuario</span>
-              @endif
-            </td>
-            <td>
-              @if($usuario->email_verified_at)
-                <span class="badge bg-primary">Activo</span>
-              @else
-                <span class="badge bg-warning text-dark">Sin verificar</span>
-              @endif
-            </td>
-            <td>
-              {{-- Aquí podrías incluir acciones como bloquear o convertir en admin --}}
-              <form action="#" method="POST" class="d-inline">
-                {{-- @csrf y botón funcional cuando implementes la acción --}}
-                <button class="btn btn-sm btn-danger" disabled><i class="bi bi-lock"></i></button>
+        <tr>
+          <td>{{ $usuario->name }}</td>
+          <td>{{ $usuario->email }}</td>
+          <td>
+            <span class="badge bg-{{ $usuario->role == 'admin' ? 'success' : 'secondary' }}">
+              {{ ucfirst($usuario->role) }}
+            </span>
+          </td>
+          <td>
+            @if(Auth::id() === $usuario->id)
+              <span class="text-muted">
+                <i class="bi bi-lock-fill"></i> No editable
+              </span>
+            @else
+              <form action="{{ route('dashboard.usuarios.actualizarRol', $usuario->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <select name="role" class="form-select form-select-sm" onchange="this.form.submit()">
+                  <option value="cliente" {{ $usuario->role === 'cliente' ? 'selected' : '' }}>Cliente</option>
+                  <option value="admin" {{ $usuario->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                </select>
               </form>
-            </td>
-          </tr>
-          @endforeach
+            @endif
+          </td>
+        </tr>
+        @endforeach
       </tbody>
     </table>
   </div>

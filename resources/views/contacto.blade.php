@@ -8,19 +8,24 @@
       <h2 class="section-title text-center fw-bold mb-4">Contáctanos</h2>
       <div class="row">
         <div class="col-md-6 mb-4">
-          <form>
+          <form method="POST" action="{{ route('contacto.enviar') }}">
+            @csrf
+
             <div class="mb-3">
               <label for="nombre" class="form-label">Nombre completo</label>
-              <input type="text" class="form-control" id="nombre" required>
+              <input type="text" name="nombre" class="form-control" id="nombre" required>
             </div>
+
             <div class="mb-3">
               <label for="correo" class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" id="correo" required>
+              <input type="email" name="correo" class="form-control" id="correo" required>
             </div>
+
             <div class="mb-3">
               <label for="mensaje" class="form-label">Mensaje</label>
-              <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+              <textarea name="mensaje" class="form-control" id="mensaje" rows="4" required></textarea>
             </div>
+
             <button type="submit" class="btn btn-degradado">Enviar mensaje</button>
           </form>
         </div>

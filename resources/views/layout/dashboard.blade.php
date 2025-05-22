@@ -40,6 +40,10 @@
                 <a class="nav-link {{ request()->routeIs('dashboard.orden') ? 'active' : '' }}" href="{{ route('dashboard.orden') }}">
                     <i class="bi bi-cart-check-fill text-danger"></i><span>Órdenes</span>
                 </a>
+                <a class="nav-link {{ request()->routeIs('dashboard.mensajes') ? 'active' : '' }}" href="{{ route('dashboard.mensajes') }}">
+                    <i class="bi bi-envelope-fill text-info"></i><span>Mensajes</span>
+                </a>
+
             </div>
 
             <!-- Botones del final -->

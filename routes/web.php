@@ -50,8 +50,8 @@ Route::controller(NosotrosController::class)->group(function () {
 });
 
 Route::controller(ContactoController::class)->group(function () {
-    Route::get('/contacto', 'index')->name('contacto');
-    Route::post('/contacto', 'enviar')->name('contacto.enviar');
+    Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+    Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contacto.enviar');
 });
 
 /*
@@ -80,6 +80,9 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->group(function () {
     // Ordenes
     Route::get('/orden', [DashboardController::class, 'ordenes'])->name('dashboard.orden');
 
+    //mensajes
+    Route::get('/dashboard/mensajes', [contactoController::class, 'verMensajes'])->name('dashboard.mensajes');
+
     // Categorías
     Route::prefix('categorias')->group(function () {
         Route::get('/', [DashboardController::class, 'categorias'])->name('dashboard.categorias');
@@ -88,6 +91,7 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/{id}/editar', [DashboardController::class, 'editarCategoria'])->name('dashboard.categorias.editar');
         Route::put('/{id}', [DashboardController::class, 'actualizarCategoria'])->name('dashboard.categorias.actualizar');
         Route::delete('/{id}', [DashboardController::class, 'eliminarCategoria'])->name('dashboard.categorias.eliminar');
+        Route::put('/dashboard/usuarios/{id}/rol', [DashboardController::class, 'actualizarRol'])->name('dashboard.usuarios.actualizarRol');
     });
 });
 

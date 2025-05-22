@@ -7,7 +7,7 @@
 
     <div class="row g-4">
         {{-- Productos --}}
-        <div class="col-md-3 col-6">
+        <div class="col-lg-3 col-md-4 col-6">
             <div class="card border-0 shadow-sm h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-basket-fill fs-1 text-success mb-2"></i>
@@ -18,7 +18,7 @@
         </div>
 
         {{-- Usuarios --}}
-        <div class="col-md-3 col-6">
+        <div class="col-lg-3 col-md-4 col-6">
             <div class="card border-0 shadow-sm h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-people-fill fs-1 text-primary mb-2"></i>
@@ -29,23 +29,34 @@
         </div>
 
         {{-- Categorías --}}
-        <div class="col-md-3 col-6">
+        <div class="col-lg-3 col-md-4 col-6">
             <div class="card border-0 shadow-sm h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-folder-fill fs-1 text-warning mb-2"></i>
                     <h6 class="mb-0">Categorías</h6>
                     <span class="fw-bold fs-5">{{ $totalCategorias }}</span>
-                </div>
+                </div>  
             </div>
         </div>
 
         {{-- Ordenes --}}
-        <div class="col-md-3 col-6">
+        <div class="col-lg-3 col-md-4 col-6">
             <div class="card border-0 shadow-sm h-100 text-center">
                 <div class="card-body">
                     <i class="bi bi-cart-check-fill fs-1 text-danger mb-2"></i>
                     <h6 class="mb-0">Ordenes</h6>
                     <span class="fw-bold fs-5">{{ $totalOrdenes }}</span>
+                </div>
+            </div>
+        </div>
+
+         {{-- Mensajes --}}
+        <div class="col-lg-3 col-md-4 col-6">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-envelope-fill fs-1 text-info mb-2"></i>
+                    <h6 class="mb-0">Mensajes</h6>
+                    <span class="fw-bold fs-5">{{ $totalMensajes }}</span>
                 </div>
             </div>
         </div>

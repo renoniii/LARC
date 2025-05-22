@@ -52,7 +52,7 @@
       @endforelse
 
       <div class="mt-4 d-flex justify-content-center">
-        {{ $productos->links() }}
+        {{ $productos->appends(request()->query())->links() }}
      </div>
     </div>
   </div>

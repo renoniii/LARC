@@ -9,14 +9,16 @@
     
         <!-- Primer slide con degradado -->
         <div class="carousel-item active">
-            <div class="hero d-flex flex-column justify-content-center align-items-center text-center">
-            <div class="container">
-                <h1 class="display-4 fw-bold">Bienvenidos a LARC</h1>
-                <p class="lead">Dotaciones, Suministros y Obras para un entorno limpio y eficiente.</p>
-                <a href="/productos" class="btn btn-larc btn-lg mt-3">Ver productos</a>
-            </div>
-            </div>
-        </div>
+  <div class="hero d-flex flex-column justify-content-center align-items-center text-center"
+       style="background-image: url('{{ asset('img/slidepic2.png') }}'); background-size: cover; background-position: center; min-height: 80vh;">
+    <div class="container text-white text-shadow">
+      <h1 class="display-4 fw-bold">Bienvenidos a LARC</h1>
+      <p class="lead">Dotaciones, Suministros y Obras para un entorno limpio y eficiente.</p>
+      <a href="/productos" class="btn btn-larc btn-lg mt-3">Ver productos</a>
+    </div>
+  </div>
+</div>
+
     
         <!-- Segundo slide con imagen -->
         <div class="carousel-item">
@@ -25,7 +27,7 @@
     
         <!-- Tercer slide con imagen -->
         <div class="carousel-item">
-            <img src="img/slide3.jpg" class="d-block w-100" alt="Slide 3">
+            <img src="{{ asset('img/slidepic3.png') }}" class="d-block w-100" alt="Slide 3">
         </div>
     
         </div>
@@ -41,32 +43,57 @@
   
   </section>
 
-  <!-- Sección de productos -->
-  <section class="py-5" id="productos">
+  <!-- Sección de categorías -->
+  <section class="py-5" id="categorias">
     <div class="container">
-      <h2 class="section-title text-center mb-4 fw-bold">Nuestros Productos</h2>
+      <h2 class="section-title text-center mb-4 fw-bold">Categorías</h2>
       <div class="row g-4">
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title fw-bold">Jabones Industriales</h5>
-              <p class="card-text">Limpieza profunda y rendimiento superior.</p>
+              <h5 class="card-title fw-bold">Limpieza y desinfección</h5>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title fw-bold">Escobas y Traperos</h5>
-              <p class="card-text">Herramientas resistentes para limpieza diaria.</p>
+              <h5 class="card-title fw-bold">Protección y utensilios de limpieza</h5>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title fw-bold">Papelería Institucional</h5>
-              <p class="card-text">Todo en artículos esenciales de oficina.</p>
+              <h5 class="card-title fw-bold">Bolsas plásticas y residuos</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Papelería sanitaria e institucional</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Productos de cafetería y cocina</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Misceláneos</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Mobiliario para residuos</h5>
             </div>
           </div>
         </div>

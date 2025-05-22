@@ -7,6 +7,8 @@ use App\Models\Producto;
 use App\Models\User;
 use App\Models\Categoria;
 use App\Models\Orden;
+use App\Models\Mensaje;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -16,7 +18,8 @@ class DashboardController extends Controller
             'totalProductos' => Producto::count(),
             'totalUsuarios' => User::count(),
             'totalCategorias' => Categoria::count(),
-            'totalOrdenes' => Orden::count()
+            'totalOrdenes' => Orden::count(),
+            'totalMensajes' => Mensaje::count(),
         ]);
     }
 
@@ -118,6 +121,24 @@ class DashboardController extends Controller
         $usuarios = User::all();
         return view('dashboard.usuarios', compact('usuarios'));
     }
+
+    public function actualizarRol(Request $request, $id)
+    {
+        $request->validate([
+            'role' => 'required|in:admin,cliente',
+        ]);
+
+        if (Auth::id() == $id) {
+            return back()->with('error', 'No puedes cambiar tu propio rol.');
+        }
+
+        $usuario = User::findOrFail($id);
+        $usuario->role = $request->role;
+        $usuario->save();   
+
+        return back()->with('success', 'Rol actualizado correctamente.');
+    }
+
 
     //ORDENES
     public function ordenes()
